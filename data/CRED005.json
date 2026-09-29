@@ -1,0 +1,14 @@
+{
+  "credentialId": "CRED005",
+  "subjectDid": "did:capstone:USER005",
+  "credentialType": "HealthcareCredential",
+  "issuer": "City Hospital",
+  "claims": {
+    "patientStatus": "verified",
+    "recordStatus": "active"
+  },
+  "credentialHash": "687602015ac487900b36a0317b65d69f89907f70333d954617ab287f059c8581",
+  "signature": "5oFRTCtMrG+PFF/NIVqiSBMyOQeZ9bHd6TyEPWNwbl+32qcckIj2FlWomLVGs2Vi2yB2xzuxD4MoKUT/KRt8Cw==",
+  "publicKey": "-----BEGIN PUBLIC KEY-----\nMCowBQYDK2VwAyEA6NXeET3n7FNEL4jL70+OTCQsL4OfvGxyxPiWqlm02Y8=\n-----END PUBLIC KEY-----\n",
+  "credentialData": "{\"claims\":{\"patientStatus\":\"verified\",\"recordStatus\":\"active\"},\"credentialId\":\"CRED005\",\"credentialType\":\"HealthcareCredential\",\"issuer\":\"City Hospital\",\"subjectDid\":\"did:capstone:USER005\"}"
+}

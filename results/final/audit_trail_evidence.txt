@@ -1,0 +1,31 @@
+BLOCKCHAIN AUDIT TRAIL EVIDENCE
+================================
+
+Platform:
+Hyperledger Fabric 2.5.16
+
+Channel:
+mychannel
+
+Chaincode:
+identity-contract v4.0
+
+Query:
+GetAuditHistory(USER001)
+
+Observed Audit Event:
+- Audit ID: AUDIT_2f0f06dff9a274c56a9b77b3325d0adac4b4c88add02412140918895040e38e3
+- Subject ID: USER001
+- Event Type: IDENTITY_REGISTERED
+- Description: Identity registered for USER001
+- Transaction ID: 2f0f06dff9a274c56a9b77b3325d0adac4b4c88add02412140918895040e38e3
+- Timestamp: 2026-09-17T10:28:12.000Z
+
+Result:
+PASS — Identity registration generated a blockchain audit record
+containing the subject identifier, event type, transaction ID,
+description, and timestamp.
+
+Evidence supports:
+Objective 1 — Identity and Credential Management
+Audit Trail — Traceability of blockchain operations

@@ -1,0 +1,45 @@
+
+=== ORIGINAL CREDENTIAL ===
+{
+  "credentialId": "CRED002",
+  "credentialType": "EducationCredential",
+  "issuer": "Alliance University",
+  "subjectDid": "did:capstone:USER002",
+  "claims": {
+    "degree": "M.Tech AI & DS",
+    "status": "verified"
+  }
+}
+
+SHA-256 Hash:
+cda1da52bc161eb57b0979d3471bb7522353e8b342895578df89b77a691477a3
+
+Ed25519 Signature:
+S6kAaTnAabbcFiqEi7VaJ1BTG1LPVDnj1py+PKMxHnEWusD5R/ElBrHurRyMEYZxXKox9erVGsc49cH7oWGeAA==
+
+=== ORIGINAL VERIFICATION ===
+Hash valid: True
+Signature valid: True
+
+=== TAMPERED CREDENTIAL ===
+{
+  "credentialId": "CRED002",
+  "credentialType": "EducationCredential",
+  "issuer": "Alliance University",
+  "subjectDid": "did:capstone:USER002",
+  "claims": {
+    "degree": "PhD",
+    "status": "verified"
+  }
+}
+
+=== TAMPER DETECTION ===
+Original hash: cda1da52bc161eb57b0979d3471bb7522353e8b342895578df89b77a691477a3
+Tampered hash: b68327525354f3b9e81bef5fd0bf1cd98eacdd0787918bd5fc671baae735218a
+
+Hash tampering detected: True
+Signature valid after tampering: False
+Signature tampering detected: True
+
+=== OBJECTIVE 2 RESULT ===
+PASS: Credential authenticity and tampering detection demonstrated.

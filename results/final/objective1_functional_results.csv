@@ -1,0 +1,6 @@
+test_id,objective1_test,expected_result,actual_result,status
+O1-T1,Identity Registration,Identity USER001 exists,USER001 exists,PASS
+O1-T2,Identity Retrieval,Identity data returned,Identity data returned,PASS
+O1-T3,Credential Registration,Credential CRED001 exists,CRED001 exists,PASS
+O1-T4,Credential Issuance,Credential status is ISSUED,CRED001 status ISSUED,PASS
+O1-T5,Credential Retrieval,Credential data returned,Credential data returned,PASS

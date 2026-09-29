@@ -1,0 +1,11 @@
+Test_ID,Credential_ID,Operation,Latency_seconds,Latency_ms
+1,CRED004,VerifyCredential,0.09,90
+2,CRED004,VerifyCredential,0.10,100
+3,CRED004,VerifyCredential,0.10,100
+4,CRED004,VerifyCredential,0.10,100
+5,CRED004,VerifyCredential,0.10,100
+6,CRED004,VerifyCredential,0.10,100
+7,CRED004,VerifyCredential,0.09,90
+8,CRED004,VerifyCredential,0.09,90
+9,CRED004,VerifyCredential,0.09,90
+10,CRED004,VerifyCredential,0.09,90

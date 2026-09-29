@@ -1,0 +1,44 @@
+OBJECTIVE 2 - FABRIC CRYPTOGRAPHIC INTEGRITY TEST
+==================================================
+
+Credential ID: CRED004
+Network: Hyperledger Fabric
+Channel: mychannel
+Chaincode: identity-contract
+Chaincode Version: 3.0
+Sequence: 6
+
+ORIGINAL CREDENTIAL VERIFICATION
+--------------------------------
+Stored Hash:
+a4424c702683f3e86e2dc3e20a19f6129b637a5f1b48c97bec1a090e1619fdbf
+
+Calculated Hash:
+a4424c702683f3e86e2dc3e20a19f6129b637a5f1b48c97bec1a090e1619fdbf
+
+Hash Valid: TRUE
+Signature Valid: TRUE
+Verified: TRUE
+
+TAMPERED CREDENTIAL TEST
+------------------------
+Modification:
+degree changed from "M.Tech AI & DS" to "PhD"
+
+Original Hash:
+a4424c702683f3e86e2dc3e20a19f6129b637a5f1b48c97bec1a090e1619fdbf
+
+Calculated Hash:
+ca8c6ca3ceaaa5d50b50834cc2ff0b8a71e4e284d49bf85b722af84412e62448
+
+Hash Valid: FALSE
+Signature Valid: FALSE
+Integrity Valid: FALSE
+
+OBJECTIVE 2 CONCLUSION
+----------------------
+The Hyperledger Fabric credential verification mechanism successfully
+detected unauthorized modification of credential data using SHA-256
+hash comparison and digital signature verification.
+
+RESULT: PASS

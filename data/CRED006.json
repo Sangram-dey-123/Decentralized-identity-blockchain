@@ -1,0 +1,14 @@
+{
+  "credentialId": "CRED006",
+  "subjectDid": "did:capstone:USER006",
+  "credentialType": "BankingCredential",
+  "issuer": "Demo Bank",
+  "claims": {
+    "kycStatus": "verified",
+    "accountStatus": "active"
+  },
+  "credentialHash": "64846c702d1bb931033a3e929971e9bfb22f188705f3deeba5c5bbf7517f24f6",
+  "signature": "ejhA2s3bFI4wFjtKtollZ/k40112qXzFbNxQjdiZkv2RKfzXot8uZlKgaPa3d/AnCxgzujLb5M17JDLM0CyEBA==",
+  "publicKey": "-----BEGIN PUBLIC KEY-----\nMCowBQYDK2VwAyEArqd2cJZ6TTA0wEHrnDHwyLJAJ0hRDkojHFA1Iza7xWU=\n-----END PUBLIC KEY-----\n",
+  "credentialData": "{\"claims\":{\"accountStatus\":\"active\",\"kycStatus\":\"verified\"},\"credentialId\":\"CRED006\",\"credentialType\":\"BankingCredential\",\"issuer\":\"Demo Bank\",\"subjectDid\":\"did:capstone:USER006\"}"
+}

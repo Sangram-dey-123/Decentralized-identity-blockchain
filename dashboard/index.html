@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Decentralized Identity Management Dashboard</title>
+
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+    <aside class="sidebar">
+
+        <h2>🔐 DID BLOCKCHAIN</h2>
+
+        <p class="subtitle">Identity Management</p>
+
+        <nav>
+            <a href="#dashboard">Dashboard</a>
+            <a href="#identity">Identity Management</a>
+            <a href="#credentials">Credential Verification</a>
+            <a href="#consent">Consent Management</a>
+            <a href="#audit">Audit Trail</a>
+            <a href="#analytics">Analytics</a>
+        </nav>
+
+    </aside>
+
+
+    <main class="main">
+
+        <header>
+            <div>
+                <h1>Decentralized Identity Management</h1>
+                <p>Hyperledger Fabric Blockchain Dashboard</p>
+            </div>
+
+            <div class="network-status">
+                <span></span> Fabric Network
+            </div>
+        </header>
+
+
+        <!-- NETWORK -->
+
+        <section id="dashboard">
+
+            <h2>Blockchain Network</h2>
+
+            <div class="cards">
+
+                <div class="card">
+                    <h3>Network</h3>
+                    <strong>Hyperledger Fabric</strong>
+                </div>
+
+                <div class="card">
+                    <h3>Channel</h3>
+                    <strong>mychannel</strong>
+                </div>
+
+                <div class="card">
+                    <h3>Chaincode</h3>
+                    <strong>identity-contract</strong>
+                </div>
+
+                <div class="card">
+                    <h3>Version</h3>
+                    <strong>4.0</strong>
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- OBJECTIVES -->
+
+        <section id="analytics">
+
+            <h2>Project Evaluation</h2>
+
+            <div class="objective-grid">
+
+                <div class="objective">
+                    <h3>Objective 1</h3>
+                    <p>Identity & Credential Management</p>
+                    <div class="progress">
+                        <div style="width:100%"></div>
+                    </div>
+                    <strong>100% — 5/5 PASS</strong>
+                </div>
+
+                <div class="objective">
+                    <h3>Objective 2</h3>
+                    <p>Cryptographic Security</p>
+                    <div class="progress">
+                        <div style="width:100%"></div>
+                    </div>
+                    <strong>4/4 Tamper Cases Detected</strong>
+                </div>
+
+                <div class="objective">
+                    <h3>Objective 3</h3>
+                    <p>Consent-Based Sharing</p>
+                    <div class="progress">
+                        <div style="width:100%"></div>
+                    </div>
+                    <strong>100% — 5/5 PASS</strong>
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- IDENTITY -->
+
+        <section id="identity">
+
+            <h2>Identity Management</h2>
+
+            <div class="panel">
+
+                <label>User ID</label>
+
+                <input
+                    type="text"
+                    id="userId"
+                    placeholder="Example: USER001"
+                >
+
+                <button onclick="searchIdentity()">
+                    Search Identity
+                </button>
+
+                <div id="identityResult"></div>
+
+            </div>
+
+        </section>
+
+
+        <!-- CREDENTIAL -->
+
+        <section id="credentials">
+
+            <h2>Credential Verification</h2>
+
+            <div class="panel">
+
+                <label>Credential ID</label>
+
+                <input
+                    type="text"
+                    id="credentialId"
+                    placeholder="Example: CRED004"
+                >
+
+                <button onclick="verifyCredential()">
+                    Verify Credential
+                </button>
+
+                <div id="credentialResult"></div>
+
+            </div>
+
+        </section>
+
+
+        <!-- CONSENT -->
+
+        <section id="consent">
+
+            <h2>Consent Management</h2>
+
+            <div class="panel">
+
+                <label>Consent ID</label>
+
+                <input
+                    type="text"
+                    id="consentId"
+                    placeholder="Example: CONSENT002"
+                >
+
+                <button onclick="checkConsent()">
+                    Check Consent
+                </button>
+
+                <div id="consentResult"></div>
+
+            </div>
+
+        </section>
+
+
+        <!-- AUDIT -->
+
+        <section id="audit">
+
+            <h2>Audit Trail</h2>
+
+            <div class="audit-box">
+
+                <div>
+                    <span class="badge green">
+                        VERIFIED
+                    </span>
+
+                    Credential cryptographic verification
+                </div>
+
+                <div>
+                    <span class="badge blue">
+                        CONSENT
+                    </span>
+
+                    Consent checked
+                </div>
+
+                <div>
+                    <span class="badge red">
+                        REJECT
+                    </span>
+
+                    Revoked credential access rejected
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <footer>
+
+            <p>
+                Decentralized Identity Management System Using Blockchain
+            </p>
+
+            <p>
+                Hyperledger Fabric 2.5.16 • SHA-256 • Ed25519
+            </p>
+
+        </footer>
+
+    </main>
+
+
+    <script src="js/dashboard.js"></script>
+
+</body>
+</html>

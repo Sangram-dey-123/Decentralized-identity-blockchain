@@ -1,0 +1,6 @@
+test_id,test_case,expected_result,actual_result,status
+T1,Consent Grant,ACTIVE,ACTIVE,PASS
+T2,Authorized BANK001 Access,ACCEPT,ACCEPT,PASS
+T3,Unauthorized OTHERBANK Access,REJECT,REJECT,PASS
+T4,Consent Revocation,REVOKED,REVOKED,PASS
+T5,Post-Revocation BANK001 Access,REJECT,REJECT,PASS

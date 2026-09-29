@@ -1,0 +1,18 @@
+objective,evaluation_area,metric,result
+O1,Identity and Credential Management,Identity registration,PASS
+O1,Identity and Credential Management,Identity retrieval,PASS
+O1,Identity and Credential Management,Credential registration,PASS
+O1,Identity and Credential Management,Credential issuance,PASS
+O1,Identity and Credential Management,Credential retrieval,PASS
+O1,Identity and Credential Management,Functional test success rate,100% (5/5)
+O1,Identity and Credential Management,Fabric ledger and audit trail,Implemented
+O2,Cryptographic Security,Original credential verification,PASS
+O2,Cryptographic Security,Tamper scenarios detected,100% (4/4)
+O2,Cryptographic Security,Signature verification,PASS
+O2,Cryptographic Security,Average verification latency,95 ms
+O3,Consent-Based Sharing,Consent grant,PASS
+O3,Consent-Based Sharing,Authorized access,ACCEPT
+O3,Consent-Based Sharing,Unauthorized access,REJECT
+O3,Consent-Based Sharing,Consent revocation,PASS
+O3,Consent-Based Sharing,Post-revocation access,REJECT
+O3,Consent-Based Sharing,Overall test success rate,100% (5/5)

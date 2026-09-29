@@ -1,0 +1,7 @@
+metric,value_percent
+Consent Grant Success Rate (%),100.0
+Authorized Access Acceptance Rate (%),100.0
+Unauthorized Access Rejection Rate (%),100.0
+Consent Revocation Success Rate (%),100.0
+Post-Revocation Rejection Rate (%),100.0
+Overall Test Success Rate (%),100.0

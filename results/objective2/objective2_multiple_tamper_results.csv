@@ -1,0 +1,6 @@
+Test_ID,Credential_ID,Modification,Hash_Valid,Signature_Valid,Integrity_Valid,Result
+1,CRED004,None,1,1,1,PASS
+2,CRED004,Degree changed from M.Tech AI & DS to PhD,0,0,0,DETECTED
+3,CRED004,Status changed from verified to revoked,0,0,0,DETECTED
+4,CRED004,Issuer changed from Alliance University to Fake University,0,0,0,DETECTED
+5,CRED004,Subject DID changed from USER004 to ATTACKER,0,0,0,DETECTED

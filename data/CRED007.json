@@ -1,0 +1,14 @@
+{
+  "credentialId": "CRED007",
+  "subjectDid": "did:capstone:USER007",
+  "credentialType": "GovernmentCredential",
+  "issuer": "Government Authority",
+  "claims": {
+    "citizenStatus": "verified",
+    "documentStatus": "active"
+  },
+  "credentialHash": "bd0e37ecb7490673669bf34890274e2d6871106ec04eed5892e432d23e77aed1",
+  "signature": "AdurmLa+nLkMaxpnSaImRhTmMOmwpaQgt6zMm0+xC1DpVdkkBTOS5h5Ud+zZGUSUz5SeZfAtYl341mNXN9yoAg==",
+  "publicKey": "-----BEGIN PUBLIC KEY-----\nMCowBQYDK2VwAyEAL7ahYgVSC7AAYRnpsSuiBAId1AMYb9LQw2KUtayzvy4=\n-----END PUBLIC KEY-----\n",
+  "credentialData": "{\"claims\":{\"citizenStatus\":\"verified\",\"documentStatus\":\"active\"},\"credentialId\":\"CRED007\",\"credentialType\":\"GovernmentCredential\",\"issuer\":\"Government Authority\",\"subjectDid\":\"did:capstone:USER007\"}"
+}

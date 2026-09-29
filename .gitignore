@@ -1,0 +1,10 @@
+.venv/
+node_modules/
+.env
+*.key
+*.pem
+*.crt
+*.priv
+*.private
+wallet/
+keystore/
