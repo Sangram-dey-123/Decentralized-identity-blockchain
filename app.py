@@ -1,394 +1,456 @@
+
 import streamlit as st
 import pandas as pd
-import hashlib
-import json
-import os
-
-# -------------------------------------------------
-# PAGE CONFIGURATION
-# -------------------------------------------------
+import plotly.express as px
+import plotly.graph_objects as go
 
 st.set_page_config(
-    page_title="Decentralized Identity Management",
+    page_title="Decentralized Identity Dashboard",
     page_icon="🔐",
     layout="wide"
 )
 
-# -------------------------------------------------
-# TITLE
-# -------------------------------------------------
+# =========================
+# PROFESSIONAL DASHBOARD CSS
+# =========================
+st.markdown("""
+<style>
+.stApp {
+    background: #0b1120;
+    color: #e5e7eb;
+}
+[data-testid="stSidebar"] {
+    background: #111827;
+}
+h1, h2, h3 {
+    color: #f8fafc;
+}
+.metric-card {
+    background: linear-gradient(135deg,#172554,#1e293b);
+    padding: 22px;
+    border-radius: 14px;
+    border: 1px solid #334155;
+}
+.metric-title {
+    color: #94a3b8;
+    font-size: 14px;
+}
+.metric-value {
+    font-size: 30px;
+    font-weight: bold;
+    color: #38bdf8;
+}
+.metric-sub {
+    color: #94a3b8;
+    font-size: 12px;
+}
+div[data-testid="stMetric"] {
+    background: #111c32;
+    border: 1px solid #26364f;
+    padding: 16px;
+    border-radius: 12px;
+}
+.stButton>button {
+    border-radius: 8px;
+    background-color: #2563eb;
+    color: white;
+    border: none;
+}
+</style>
+""", unsafe_allow_html=True)
 
-st.title("🔐 Decentralized Identity Management System")
+# =========================
+# SIDEBAR
+# =========================
+st.sidebar.title("🔐 IDENTITY SYSTEM")
+st.sidebar.caption("Hyperledger Fabric | Research Prototype")
 
-st.subheader(
-    "Blockchain-Based Digital Identity & Credential Verification"
+page = st.sidebar.radio(
+    "Navigation",
+    [
+        "Overview",
+        "O1 Identity Management",
+        "O2 Security & Integrity",
+        "O3 Consent Access",
+        "Audit & Network"
+    ]
 )
 
-st.info(
-    "Python blockchain-style prototype demonstrating decentralized "
-    "identity, credential management, verification, access control "
-    "and audit trails."
+st.sidebar.divider()
+st.sidebar.success("Research Prototype")
+st.sidebar.caption("Org1 | Org2 | mychannel")
+
+# =========================
+# HEADER
+# =========================
+st.title("🔐 Decentralized Identity Management")
+st.caption(
+    "Blockchain-Based Identity, Credential Verification "
+    "and Consent-Aware Access Control"
 )
 
-# -------------------------------------------------
-# LOAD CSV FILES
-# -------------------------------------------------
+# =========================
+# KPI FUNCTION
+# =========================
+def metric_card(title, value, subtitle):
+    st.markdown(f"""
+    <div class="metric-card">
+        <div class="metric-title">{title}</div>
+        <div class="metric-value">{value}</div>
+        <div class="metric-sub">{subtitle}</div>
+    </div>
+    """, unsafe_allow_html=True)
 
-def load_csv(filename):
-    if os.path.exists(filename):
-        try:
-            return pd.read_csv(filename)
-        except Exception as e:
-            st.error(f"Error reading {filename}: {e}")
-            return pd.DataFrame()
+# =========================
+# OVERVIEW
+# =========================
+if page == "Overview":
 
-    return pd.DataFrame()
+    st.subheader("System Overview")
 
+    c1, c2, c3, c4 = st.columns(4)
 
-dashboard = load_csv("final_project_dashboard.csv")
-audit = load_csv("final_blockchain_audit_trail.csv")
-tests = load_csv("final_system_test_results.csv")
+    with c1:
+        metric_card("Blockchain Blocks", "56", "Project evaluation snapshot")
 
-# -------------------------------------------------
-# DASHBOARD METRICS
-# -------------------------------------------------
+    with c2:
+        metric_card("Identities", "25", "Project evaluation snapshot")
 
-metrics = {}
+    with c3:
+        metric_card("Credentials", "26", "Project evaluation snapshot")
 
-if not dashboard.empty:
+    with c4:
+        metric_card("Integrity", "VALID", "Reported evaluation result")
 
-    if "Metric" in dashboard.columns and "Value" in dashboard.columns:
+    st.divider()
 
-        for _, row in dashboard.iterrows():
-            metrics[str(row["Metric"])] = row["Value"]
+    left, right = st.columns(2)
 
+    with left:
+        st.subheader("Research Objectives")
 
-total_blocks = metrics.get("Total Blockchain Blocks", 56)
-identities = metrics.get("Identities Created", 25)
-credentials = metrics.get("Credentials Issued", 26)
-revoked = metrics.get("Credentials Revoked", 1)
-access_granted = metrics.get("Access Granted", 1)
-access_revoked = metrics.get("Access Revoked", 1)
+        objective_data = pd.DataFrame({
+            "Objective": ["O1", "O2", "O3"],
+            "Passed": [5, 4, 5],
+            "Total": [5, 4, 5]
+        })
 
-# -------------------------------------------------
-# SYSTEM DASHBOARD
-# -------------------------------------------------
-
-st.header("📊 System Dashboard")
-
-col1, col2, col3 = st.columns(3)
-
-with col1:
-    st.metric(
-        "⛓️ Blockchain Blocks",
-        total_blocks
-    )
-
-with col2:
-    st.metric(
-        "👤 Identities Created",
-        identities
-    )
-
-with col3:
-    st.metric(
-        "📜 Credentials Issued",
-        credentials
-    )
-
-col4, col5, col6 = st.columns(3)
-
-with col4:
-    st.metric(
-        "🚫 Credentials Revoked",
-        revoked
-    )
-
-with col5:
-    st.metric(
-        "✅ Access Granted",
-        access_granted
-    )
-
-with col6:
-    st.metric(
-        "🔒 Access Revoked",
-        access_revoked
-    )
-
-# -------------------------------------------------
-# BLOCKCHAIN INTEGRITY
-# -------------------------------------------------
-
-st.header("⛓️ Blockchain Integrity")
-
-st.success("✅ BLOCKCHAIN STATUS: VALID")
-
-st.write(
-    "The blockchain ledger passed the integrity validation test. "
-    "Each block contains a cryptographic hash linked to the previous block."
-)
-
-# -------------------------------------------------
-# FINAL SYSTEM TEST RESULTS
-# -------------------------------------------------
-
-st.header("🧪 Final System Test Results")
-
-if not tests.empty:
-
-    st.dataframe(
-        tests,
-        use_container_width=True,
-        hide_index=True
-    )
-
-    total_tests = len(tests)
-    passed_tests = 0
-
-    # Check Status column
-    if "Status" in tests.columns:
-
-        status_values = (
-            tests["Status"]
-            .astype(str)
-            .str.strip()
-            .str.upper()
+        fig = px.bar(
+            objective_data,
+            x="Objective",
+            y="Passed",
+            text="Passed",
+            color="Objective",
+            title="Objective Evaluation Results"
         )
 
-        passed_tests = status_values.isin([
-            "PASS",
-            "PASSED",
-            "SUCCESS",
-            "SUCCESSFUL",
-            "TRUE"
-        ]).sum()
-
-    # Check Result column if Status is unavailable
-    elif "Result" in tests.columns:
-
-        result_values = (
-            tests["Result"]
-            .astype(str)
-            .str.strip()
-            .str.upper()
+        fig.update_layout(
+            template="plotly_dark",
+            paper_bgcolor="#0b1120",
+            plot_bgcolor="#0b1120",
+            showlegend=False
         )
 
-        passed_tests = result_values.isin([
-            "PASS",
-            "PASSED",
-            "SUCCESS",
-            "SUCCESSFUL",
-            "TRUE"
-        ]).sum()
+        st.plotly_chart(fig, width="stretch")
 
-    # Display final result
-    if total_tests > 0:
+    with right:
+        st.subheader("System Architecture")
 
-        success_rate = (
-            passed_tests / total_tests
-        ) * 100
+        st.markdown("""
+        **Organization 1**
+        - Identity Registration
+        - Credential Issuance
+        - Consent Management
 
-        st.metric(
-            "System Test Success Rate",
-            f"{success_rate:.2f}%"
+        **Organization 2**
+        - Credential Verification
+        - Access Requests
+        - Integrity Checking
+
+        **Blockchain Layer**
+        - Hyperledger Fabric
+        - Chaincode
+        - Immutable Audit Records
+        """)
+
+    st.info(
+        "Dashboard evaluation values are project-reported snapshots. "
+        "Live blockchain status will be connected in a later step."
+    )
+
+# =========================
+# O1 IDENTITY
+# =========================
+elif page == "O1 Identity Management":
+
+    st.subheader("O1 — Identity & Credential Lifecycle")
+
+    st.markdown(
+        "Identity registration, identity management, credential issuance "
+        "and credential verification."
+    )
+
+    tab1, tab2 = st.tabs([
+        "Identity Registration",
+        "Credential Registration"
+    ])
+
+    with tab1:
+
+        st.markdown("### Register Identity")
+
+        identity_id = st.text_input("Identity ID")
+        identity_name = st.text_input("Identity Name")
+        identity_role = st.selectbox(
+            "Identity Role",
+            ["Healthcare", "Banking", "Government", "Student", "Other"]
         )
 
-        st.write(
-            f"**Tests Passed: {passed_tests}/{total_tests}**"
+        if st.button("Preview Identity Registration"):
+
+            if identity_id and identity_name:
+
+                st.success("Identity registration preview generated.")
+
+                st.json({
+                    "identity_id": identity_id,
+                    "name": identity_name,
+                    "role": identity_role
+                })
+
+                st.warning(
+                    "Preview only. This does not submit a Fabric transaction."
+                )
+
+            else:
+                st.error("Enter Identity ID and Identity Name.")
+
+    with tab2:
+
+        st.markdown("### Register Credential")
+
+        credential_id = st.text_input("Credential ID")
+        owner_id = st.text_input("Owner Identity ID")
+        credential_type = st.selectbox(
+            "Credential Type",
+            ["Healthcare Credential", "Banking KYC", "Government ID"]
         )
 
-        if success_rate == 100:
+        if st.button("Preview Credential Registration"):
 
-            st.success(
-                f"🎉 All {total_tests} system tests passed successfully!"
-            )
+            if credential_id and owner_id:
+
+                st.success("Credential preview generated.")
+
+                st.json({
+                    "credential_id": credential_id,
+                    "owner_id": owner_id,
+                    "credential_type": credential_type
+                })
+
+                st.warning(
+                    "Preview only. Fabric integration will be added separately."
+                )
+
+            else:
+                st.error("Enter Credential ID and Owner Identity ID.")
+
+# =========================
+# O2 SECURITY
+# =========================
+elif page == "O2 Security & Integrity":
+
+    st.subheader("O2 — Blockchain Security & Integrity")
+
+    st.markdown(
+        "Cryptographic integrity checking using SHA-256 "
+        "and digital signature verification using Ed25519."
+    )
+
+    tab1, tab2 = st.tabs([
+        "SHA-256 Integrity",
+        "Security Evaluation"
+    ])
+
+    with tab1:
+
+        import hashlib
+
+        original_data = st.text_area(
+            "Original Credential Data",
+            "Demo Healthcare Credential"
+        )
+
+        modified_data = st.text_area(
+            "Verification Data",
+            "Demo Healthcare Credential"
+        )
+
+        if st.button("Check SHA-256 Integrity"):
+
+            original_hash = hashlib.sha256(
+                original_data.encode()
+            ).hexdigest()
+
+            modified_hash = hashlib.sha256(
+                modified_data.encode()
+            ).hexdigest()
+
+            st.code("Original Hash: " + original_hash)
+            st.code("Verification Hash: " + modified_hash)
+
+            if original_hash == modified_hash:
+                st.success("Integrity Check: MATCH")
+            else:
+                st.error("Integrity Check: MISMATCH — Data Modified")
+
+    with tab2:
+
+        st.markdown("### Reported Security Evaluation")
+
+        security_data = pd.DataFrame({
+            "Scenario": [
+                "Credential Modification",
+                "Hash Tampering",
+                "Signature Tampering",
+                "Unauthorized Modification"
+            ],
+            "Detected": [1, 1, 1, 1]
+        })
+
+        fig = px.bar(
+            security_data,
+            x="Scenario",
+            y="Detected",
+            title="Reported Tampering Detection Scenarios",
+            text="Detected"
+        )
+
+        fig.update_layout(
+            template="plotly_dark",
+            paper_bgcolor="#0b1120",
+            plot_bgcolor="#0b1120",
+            yaxis_range=[0, 1.3]
+        )
+
+        st.plotly_chart(fig, width="stretch")
+
+        st.success("Reported evaluation: 4/4 predefined scenarios detected")
+
+        st.caption(
+            "This visualization reflects reported prototype evaluation, "
+            "not a new live security test."
+        )
+
+# =========================
+# O3 CONSENT
+# =========================
+elif page == "O3 Consent Access":
+
+    st.subheader("O3 — Consent-Based Credential Access")
+
+    st.markdown(
+        "Demonstration of consent-aware access control "
+        "and post-revocation access rejection."
+    )
+
+    identity = st.text_input("Data Owner Identity")
+    requester = st.text_input("Requesting Organization")
+
+    if "consent_status" not in st.session_state:
+        st.session_state.consent_status = "NOT GRANTED"
+
+    st.markdown("### Consent Management")
+
+    c1, c2, c3 = st.columns(3)
+
+    with c1:
+        if st.button("Grant Consent"):
+            st.session_state.consent_status = "GRANTED"
+
+    with c2:
+        if st.button("Revoke Consent"):
+            st.session_state.consent_status = "REVOKED"
+
+    with c3:
+        if st.button("Reset Consent"):
+            st.session_state.consent_status = "NOT GRANTED"
+
+    st.info(
+        "Current Consent Status: "
+        + st.session_state.consent_status
+    )
+
+    st.divider()
+
+    if st.button("Request Credential Access"):
+
+        if st.session_state.consent_status == "GRANTED":
+            st.success("ACCESS ACCEPTED — Consent is granted.")
 
         else:
-
-            st.warning(
-                f"⚠️ {passed_tests} out of {total_tests} tests passed."
+            st.error(
+                "ACCESS REJECTED — Consent not granted or revoked."
             )
 
-else:
-
     st.warning(
-        "Final system test results file was not found."
+        "This is a local consent simulator. "
+        "No actual chaincode request is executed."
     )
 
-# -------------------------------------------------
-# FINAL PROJECT RESULTS
-# -------------------------------------------------
+# =========================
+# AUDIT & NETWORK
+# =========================
+elif page == "Audit & Network":
 
-st.header("📈 Final Project Results")
+    st.subheader("Audit & Blockchain Information")
 
-if os.path.exists("final_project_results.png"):
+    st.markdown("### Network Configuration")
 
-    st.image(
-        "final_project_results.png",
-        caption="Decentralized Identity Management System - Final Results",
-        use_container_width=True
-    )
+    st.code("""
+Channel: mychannel
+Organization 1: Org1
+Organization 2: Org2
+Consensus: Hyperledger Fabric Raft
+Chaincode: identity-contract
+""")
 
-else:
+    st.markdown("### Reported Audit Snapshot")
 
-    st.warning(
-        "Final project results image was not found."
-    )
-
-# -------------------------------------------------
-# BLOCKCHAIN AUDIT TRAIL
-# -------------------------------------------------
-
-st.header("📋 Blockchain Audit Trail")
-
-st.write(
-    "The audit trail records identity creation, credential issuance, "
-    "credential revocation and access-control events."
-)
-
-if not audit.empty:
-
-    filtered_audit = audit.copy()
-
-    if "Event" in audit.columns:
-
-        event_list = sorted(
-            audit["Event"]
-            .dropna()
-            .astype(str)
-            .unique()
-            .tolist()
-        )
-
-        selected_event = st.selectbox(
-            "Filter by Event",
-            ["All"] + event_list
-        )
-
-        if selected_event != "All":
-
-            filtered_audit = audit[
-                audit["Event"].astype(str) == selected_event
-            ]
+    audit_data = pd.DataFrame({
+        "Event": [
+            "Identity Registration",
+            "Credential Issuance",
+            "Consent Granted",
+            "Access Request",
+            "Consent Revocation"
+        ],
+        "Status": [
+            "Recorded",
+            "Recorded",
+            "Recorded",
+            "Recorded",
+            "Recorded"
+        ]
+    })
 
     st.dataframe(
-        filtered_audit,
-        use_container_width=True,
+        audit_data,
+        width="stretch",
         hide_index=True
     )
 
-else:
-
     st.warning(
-        "Blockchain audit trail file was not found."
+        "Audit rows shown here are illustrative. "
+        "Live ledger history will be connected separately."
     )
 
-# -------------------------------------------------
-# CREDENTIAL INTEGRITY VERIFICATION
-# -------------------------------------------------
-
-st.header("🔎 Credential Integrity Verification Demo")
-
-st.write(
-    "This demonstration shows how SHA-256 hashing can detect "
-    "unauthorized modification of credential data."
-)
-
-credential = {
-    "credential_id": "VC-DEMO-001",
-    "holder": "Demo Student",
-    "degree": "M.Tech Artificial Intelligence",
-    "issuer": "Demo University",
-    "status": "ACTIVE"
-}
-
-# Original credential hash
-original_data = json.dumps(
-    credential,
-    sort_keys=True
-).encode()
-
-original_hash = hashlib.sha256(
-    original_data
-).hexdigest()
-
-# Tampering option
-tamper = st.checkbox(
-    "Simulate credential tampering"
-)
-
-if tamper:
-
-    credential["status"] = "FAKE"
-
-# Current hash
-current_data = json.dumps(
-    credential,
-    sort_keys=True
-).encode()
-
-current_hash = hashlib.sha256(
-    current_data
-).hexdigest()
-
-col1, col2 = st.columns(2)
-
-with col1:
-
-    st.write("**Original Hash**")
-
-    st.code(original_hash)
-
-with col2:
-
-    st.write("**Current Hash**")
-
-    st.code(current_hash)
-
-# Verification result
-if original_hash == current_hash:
-
-    st.success(
-        "✅ Credential is VALID — No modification detected."
-    )
-
-else:
-
-    st.error(
-        "🚨 Credential is TAMPERED — Hash mismatch detected!"
-    )
-
-# -------------------------------------------------
-# PROJECT FEATURES
-# -------------------------------------------------
-
-st.header("📌 Project Features")
-
-features = [
-    "Decentralized Digital Identity",
-    "Blockchain-Based Credential Management",
-    "SHA-256 Credential Hashing",
-    "Credential Verification",
-    "Credential Revocation",
-    "Access Control",
-    "Blockchain Audit Trail",
-    "Tamper Detection",
-    "Cross-Sector Credential Management",
-    "Blockchain Integrity Validation"
-]
-
-for feature in features:
-
-    st.write(f"✅ {feature}")
-
-# -------------------------------------------------
 # FOOTER
-# -------------------------------------------------
-
+# =========================
 st.divider()
 
 st.caption(
-    "Decentralized Identity Management System Using Blockchain | "
-    "M.Tech AIDS | Academic Prototype"
+    "Decentralized Identity Management System | "
+    "Hyperledger Fabric | Academic Research Prototype"
 )
+
